@@ -1,23 +1,28 @@
 package apslivraria;
 
-import apslivraria.controller.Connection;
-import apslivraria.model.Autor;
-import apslivraria.model.Editora;
-import apslivraria.model.Livro;
+import java.lang.ModuleLayer.Controller;
+import java.util.List;
 
-public class apslivrariaApplication {
+import apslivraria.model.Connection;
+import apslivraria.model.dao.Autor;
+import apslivraria.model.dao.Editora;
+import apslivraria.model.dao.Livro;
+
+public class apslivrariaApplication{
+	Controller ctrl;
 
 	public static void main(String[] args) {
 		new Connection();
-		Connection.getCurrentSessionFromJPA();
-		Autor autor = new Autor("Vinícius", "Maximiliano");
-		Autor autor2 = new Autor("Cara", "Maluco");
-//		List <Autor> autores;
-//		autores.add(autor);
-//		autores.add(autor2);
-		Editora editora = new Editora("CasaVapo", "www.twitter.com/vhouse");
-		Livro livro = new Livro(777, "Kvothe", 70, editora);
-		Connection.addLivro(livro);
-		
+//		Connection.getCurrentSessionFromJPA();
+//		Livro livro = new Livro("777666", "O Alquimista", 70);
+//		Connection.addLivro(livro);
+//		Connection.addEditora(edit);
+//		Connection.addAutor(autor2);
+//		Connection.addAutor(autor);
+//		List <Livro> livros = Connection.findAllBooks();
+//		for (int i = 0; i < livros.size(); i++) {
+//			System.out.println(livros.get(i).getIsbn() +"\n"+ livros.get(i).getNome() +"\n"+ livros.get(i).getPreco());
+//		}
+
 	}
 }
