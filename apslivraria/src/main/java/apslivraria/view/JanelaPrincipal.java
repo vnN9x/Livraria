@@ -1,146 +1,121 @@
 package apslivraria.view;
 
-import java.awt.FlowLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
-import javax.swing.ButtonGroup;
 
+public class JanelaPrincipal {
 
-public class JanelaPrincipal extends JFrame implements ActionListener {
-	private static final long serialVersionUID = 1L;
+	public void addComponentToPane(Container pane) {
+		JTabbedPane tabbedPane = new JTabbedPane();
 
-	JButton button;
-
-	JLabel return_field;
-
-	JTextField busca_txt_field;
-	JTextField altera_txt_field;
-
-	JComboBox altera_dropdown_menu;
-
-	JRadioButton check_busca;
-	JRadioButton check_altera;
-	JRadioButton check_inclui;
-	JRadioButton check_exclui;
-
-	private JanelaPrincipal() {
-		super("Livraria");
-
-		// width, height
-		setSize(400, 600);
-		setResizable(false);
-		setLocationRelativeTo(null);
-		setLayout(new FlowLayout());
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-		button = new JButton("Executar");
-		busca_txt_field = new JTextField("", 36);
-		return_field = new JLabel("return field");
-
-		ButtonGroup check_boxes = new ButtonGroup();
-
-		check_busca = new JRadioButton("Buscar");
-		check_altera = new JRadioButton("Alterar");
-		check_inclui = new JRadioButton("Incluir");
-		check_exclui = new JRadioButton("Excluir");
-
-		// radio button group
-		check_boxes.add(check_busca);
-		check_boxes.add(check_altera);
-		check_boxes.add(check_inclui);
-		check_boxes.add(check_exclui);
-
-		add(check_busca);
-		add(check_altera);
-		add(check_inclui);
-		add(check_exclui);
-		add(button);
-
-		// action listeners
-		button.addActionListener(this);
-
-		//check_busca.addActionListener(this);
-		//check_altera.addActionListener(this);
-		//check_inclui.addActionListener(this);
-		//check_exclui.addActionListener(this);
-
-	}
-
-	public static void main (String[] args) {
-		new JanelaPrincipal().setVisible(true);
-	}
-
-	public void actionPerformed(ActionEvent e) {
-		//System.out.println(e.getSource());
-
-		// Cleaning the jframe dynamic objects
-		if (e.getSource() == check_busca || e.getSource() == check_altera || e.getSource() == check_inclui || e.getSource() == check_exclui) {
-			//invalidate();
-			//revalidate();
-			//repaint();
-		}
-
-		if (check_busca.isSelected()) {
-			System.out.println("busca selecionado");
-			//System.out.println(txt_field.getText());
-
-			if (busca_txt_field == null) {
-				//add(busca_txt_field);
-				//invalidate();
-				//revalidate();
-				//repaint();
+		JPanel card1 = new JPanel() {
+			private static final long serialVersionUID = 1L;
+			public Dimension getPreferredSize() {
+				Dimension size = super.getPreferredSize();
+				size.width += 100;
+				size.height += 100;
+				return size;
 			}
+		};
 
-		} else if (check_altera.isSelected()) {
-			System.out.println("altera selecionado");
-			//System.out.println(txt_field.getText());
+		// componetes card1
+		JTextField card1_busca_txt_field = new JTextField("", 36);
+		JButton card1_busca_run_button = new JButton("Buscar");
 
-			if (altera_dropdown_menu == null) {
-				//altera_dropdown_menu = new JComboBox();
-
-				//altera_dropdown_menu.addItem("Teste0");
-				//altera_dropdown_menu.addItem("Teste1");
-				//altera_dropdown_menu.addItem("Teste2");
-				//altera_dropdown_menu.addItem("Teste3");
-				//altera_dropdown_menu.addItem("Teste4");
-
-				//altera_dropdown_menu.addActionListener(this);
-
-				//add(altera_dropdown_menu);
-				//invalidate();
-				//revalidate();
-
+		card1_busca_run_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//
 			}
+		});
 
-			if (altera_txt_field == null) {
-				//altera_txt_field = new JTextField("alterar para...", 36);
+		card1.add(card1_busca_txt_field);
+		card1.add(card1_busca_run_button);
 
-				//add(altera_txt_field);
-				//invalidate();
-				//revalidate();
 
+		JPanel card2 = new JPanel();
+		JTextField card2_altera_busca_txt_field = new JTextField("", 36);
+		JButton card2_altera_busca_run_button = new JButton("Buscar");
+
+		card2_altera_busca_run_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//
 			}
+		});
 
-		} else if (check_inclui.isSelected()) {
-			System.out.println("inclui selecionado");
-			//System.out.println(txt_field.getText());
+		JTextField card2_altera_txt_field = new JTextField("", 36);
+		JButton card2_altera_run_button = new JButton("Alterar");
 
-		} else if (check_exclui.isSelected()) {
-			System.out.println("exclui selecionado");
-			//System.out.println(txt_field.getText());
+		card2_altera_run_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//
+			}
+		});
 
-		}
+		card2.add(card2_altera_busca_txt_field);
+		card2.add(card2_altera_busca_run_button);
+		card2.add(card2_altera_txt_field);
+		card2.add(card2_altera_run_button);
 
+
+		JPanel card3 = new JPanel();
+		JButton card3_inclui_run_button = new JButton("Incluir");
+
+		card3_inclui_run_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//
+			}
+		});
+
+		card3.add(card3_inclui_run_button);
+
+
+		JPanel card4 = new JPanel();
+		JButton card4_exclui_run_button = new JButton("Excluir");
+
+		card4_exclui_run_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//
+			}
+		});
+
+		card4.add(card4_exclui_run_button);
+
+
+		tabbedPane.addTab("Buscar", card1);
+		tabbedPane.addTab("Alterar", card2);
+		tabbedPane.addTab("Incluir", card3);
+		tabbedPane.addTab("Excluir", card4);
+
+
+		pane.add(tabbedPane, BorderLayout.CENTER);
 	}
 
-	public void clearJFrameUsableSpace() {
+	private static void createAndShowGUI() {
+		// Set up the window.
+		JFrame frame = new JFrame("TabDemo");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(720, 1280);
+		frame.setResizable(false);
+		frame.setLocationRelativeTo(null);
 
+		// Set up content pane.
+		JanelaPrincipal demo = new JanelaPrincipal();
+		demo.addComponentToPane(frame.getContentPane());
+
+		//Display the window.
+		frame.pack();
+		frame.setVisible(true);
 	}
+
+	public static void main(String[] args) {
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				createAndShowGUI();
+			}
+		});
+	}
+
 }
