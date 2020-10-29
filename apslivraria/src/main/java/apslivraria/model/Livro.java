@@ -70,4 +70,8 @@ public class Livro {
 		this.preco = preco;
 	}
 
+	public String toString() {
+		return this.nome;
+	}
+
 }

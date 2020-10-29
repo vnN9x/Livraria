@@ -65,4 +65,8 @@ public class Editora {
 	public void setSite(String site) {
 		this.site = site;
 	}
+
+	public String toString() {
+		return this.nome;
+	}
 }
