@@ -8,9 +8,9 @@
     <persistence-unit name="Livraria">
 	<!--persistence-unit name="jpa-tutorial"-->
 	
-		<class>apslivraria.model.Autor</class>
-  		<class>apslivraria.model.Editora</class>
-  		<class>apslivraria.model.Livro</class>
+		<class>apslivraria.entidades.Autor</class>
+  		<class>apslivraria.entidades.Editora</class>
+  		<class>apslivraria.endidades.Livro</class>
 
 		<properties>
 	        <!--property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/-->

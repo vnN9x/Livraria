@@ -1,28 +1,31 @@
 package apslivraria;
 
-import java.lang.ModuleLayer.Controller;
+import java.util.ArrayList;
 import java.util.List;
 
-import apslivraria.model.Connection;
-import apslivraria.model.dao.Autor;
-import apslivraria.model.dao.Editora;
-import apslivraria.model.dao.Livro;
+import apslivraria.entidades.Autor;
+import apslivraria.entidades.Editora;
+import apslivraria.entidades.Livro;
+import apslivraria.model.dao.Crud;
 
 public class apslivrariaApplication{
-	Controller ctrl;
+	static Crud crud = new Crud();
 
 	public static void main(String[] args) {
-		new Connection();
-//		Connection.getCurrentSessionFromJPA();
-//		Livro livro = new Livro("777666", "O Alquimista", 70);
-//		Connection.addLivro(livro);
-//		Connection.addEditora(edit);
-//		Connection.addAutor(autor2);
-//		Connection.addAutor(autor);
-//		List <Livro> livros = Connection.findAllBooks();
-//		for (int i = 0; i < livros.size(); i++) {
-//			System.out.println(livros.get(i).getIsbn() +"\n"+ livros.get(i).getNome() +"\n"+ livros.get(i).getPreco());
-//		}
-
+		List <Livro> livros = crud.findAllBooks();
+		for (int i = 0; i < livros.size(); i++) {	
+			System.out.println("LIVRO: " + livros.get(i) + ", AUTORES: " + livros.get(i).getAutores() + 
+					", EDITORA: "+ livros.get(i).getEditora());
+		}
+		
+		List<Autor> autores = crud.findAllAuthors();
+		for (int i = 0; i < autores.size(); i++) {
+			System.out.println(autores.get(i)+ ", Livros: " + autores.get(i).getLivros());
+		}
+		
+		List<Editora> editoras = crud.findAllPublishers();
+		for (int i = 0; i < editoras.size(); i++) {
+			System.out.println(editoras.get(i)+ ", Livros: " + editoras.get(i).getLivros());
+		}
 	}
 }
