@@ -13,7 +13,8 @@ import java.util.LinkedHashMap;
 
 import javax.swing.*;
 
-public class JanelaPrincipal extends JFrame implements ActionListener {
+//public class JanelaPrincipal extends JFrame implements ActionListener {
+public class JanelaPrincipal extends JFrame{
 	private static final long serialVersionUID = 1L;
 
 	JTabbedPane tabbedPane;
@@ -60,6 +61,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener {
 	JComboBox inclui_jcombobox_opcoes_editora;
 	JComboBox inclui_jcombobox_opcoes_autor;
 	Map<JComboBox, Boolean> inclui_map_jcombobox_boolean_todos_jcomboboxes_de_autor;
+	//Map<JComboBox, Map<Boolean, JPanel>> inclui_map_jcombobox_boolean_todos_jcomboboxes_de_autor;
 
 	// EXCLUI
 	JButton exclui_jbutton_run;
@@ -241,8 +243,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener {
 		Vector altera_vector_editora_combobox_itens = new Vector();
 
 		//altera_jpanel_livro_horizontal_alignment_group
-		Map<Boolean, JPanel> altera_map_boolean_jpanel = new LinkedHashMap<>();
-		Map<JComboBox, Map<Boolean, JPanel>> altera_map_jcombobox_map_boolean_jpanel_todas__opcoes_jcomboboxes_autor = new LinkedHashMap<>();
+		Map<JComboBox, Boolean> altera_map_jcombobox_boolean_todas_opcoes_jcomboboxes_autor = new LinkedHashMap<>();
 
 		List<Autor> tst_autores_list_altera = new ArrayList<Autor>();
 
@@ -330,12 +331,12 @@ public class JanelaPrincipal extends JFrame implements ActionListener {
 		}
 
 		//TODO: atualizar o map
-		altera_map_boolean_jpanel.put(true, altera_jpanel_livro_horizontal_alignment_group);
-		altera_map_jcombobox_map_boolean_jpanel_todas__opcoes_jcomboboxes_autor.put(altera_jcombobox_opcoes_autor, altera_map_boolean_jpanel);
+		//altera_map_jcombobox_boolean_todas_opcoes_jcomboboxes_autor.put(altera_jcombobox_opcoes_autor, new LinkedHashMap<Boolean, JPanel>(){{put(true, altera_jpanel_livro_horizontal_alignment_group);}});
+		altera_map_jcombobox_boolean_todas_opcoes_jcomboboxes_autor.put(altera_jcombobox_opcoes_autor, true);
 
 		altera_jcombobox_opcoes_autor.setAlignmentX(CENTER_ALIGNMENT);
 		altera_jcombobox_opcoes_autor.setMaximumSize(busca_jtextfield_input.getPreferredSize());
-		altera_jcombobox_opcoes_autor.addActionListener(this);
+		altera_jcombobox_opcoes_autor.addActionListener(new inclui_action_listener(altera_map_jcombobox_boolean_todas_opcoes_jcomboboxes_autor, altera_jpanel_livro_horizontal_alignment_group, tst_autores_list, busca_jtextfield_input));
 
 		altera_jpanel_livro_horizontal_alignment_group.add(altera_jcombobox_opcoes_autor);
 
@@ -531,7 +532,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener {
 		inclui_jcombobox_opcoes_autor = new JComboBox(new DefaultComboBoxModel(inclui_vector_combobox_opcoes_autor));
 		inclui_jcombobox_opcoes_autor.setAlignmentX(CENTER_ALIGNMENT);
 		inclui_jcombobox_opcoes_autor.setMaximumSize(busca_jtextfield_input.getPreferredSize());
-		inclui_jcombobox_opcoes_autor.addActionListener(this);
+		//inclui_jcombobox_opcoes_autor.addActionListener(new inclui_action_listener(inclui_map_jcombobox_boolean_todos_jcomboboxes_de_autor, inclui_jpanel_autores_comboboxes_wrapper, tst_autores_list, busca_jtextfield_input));
 
 		inclui_map_jcombobox_boolean_todos_jcomboboxes_de_autor = new LinkedHashMap<>();
 
@@ -578,9 +579,12 @@ public class JanelaPrincipal extends JFrame implements ActionListener {
 		}
 
 		// Incluindo o primeiro combobox no Map de comboboxes de seleção dos autores
+		//inclui_map_jcombobox_boolean_todos_jcomboboxes_de_autor.put(inclui_jcombobox_opcoes_autor, new LinkedHashMap<Boolean, JPanel>(){{put(true, inclui_jpanel_autores_comboboxes_wrapper);}});
 		inclui_map_jcombobox_boolean_todos_jcomboboxes_de_autor.put(inclui_jcombobox_opcoes_autor, true);
 
+
 		inclui_jpanel_autores_comboboxes_wrapper.add(inclui_jcombobox_opcoes_autor);
+
 		inclui_jpanel_livro_alinhamento_horizontal.add(inclui_jtextfield_livro_isbn);
 		inclui_jpanel_livro_alinhamento_horizontal.add(inclui_jtextfield_livro_nome);
 		inclui_jpanel_livro_alinhamento_horizontal.add(inclui_jcombobox_opcoes_editora);
@@ -649,6 +653,8 @@ public class JanelaPrincipal extends JFrame implements ActionListener {
 
 			}
 		});
+
+		inclui_jcombobox_opcoes_autor.addActionListener(new inclui_action_listener(inclui_map_jcombobox_boolean_todos_jcomboboxes_de_autor, inclui_jpanel_autores_comboboxes_wrapper, tst_autores_list, busca_jtextfield_input));
 
 		// Adicionando tudo ao painel principal
 		panel.add(inclui_jbutton_run);
@@ -782,35 +788,53 @@ public class JanelaPrincipal extends JFrame implements ActionListener {
 		return panel;
 	}
 
-	public void actionPerformed(ActionEvent e) {
-		for (JComboBox crnt_combobox : inclui_map_jcombobox_boolean_todos_jcomboboxes_de_autor.keySet()) {
-			if (e.getSource() == crnt_combobox) {
-				if (inclui_map_jcombobox_boolean_todos_jcomboboxes_de_autor.get(crnt_combobox)) {
-					Vector tmp_vector = new Vector();
-					tmp_vector.add(null);
-					for (Autor autor : tst_autores_list) {
-						tmp_vector.add(autor);
-					}
-					JComboBox tmp_combobox = new JComboBox(tmp_vector);
-					inclui_map_jcombobox_boolean_todos_jcomboboxes_de_autor.put(tmp_combobox, true);
-					inclui_jpanel_autores_comboboxes_wrapper.add(tmp_combobox);
-
-					tmp_combobox.addActionListener(this);
-					tmp_combobox.setAlignmentX(CENTER_ALIGNMENT);
-					tmp_combobox.setMaximumSize(busca_jtextfield_input.getPreferredSize());
-
-					inclui_jpanel_autores_comboboxes_wrapper.revalidate();
-					inclui_jpanel_autores_comboboxes_wrapper.repaint();
-
-					inclui_map_jcombobox_boolean_todos_jcomboboxes_de_autor.put(crnt_combobox, false);
-				}
-			}
-		}
-	}
-
-
 	public static void main (String[] args) {
 		new JanelaPrincipal();
 	}
 
+}
+
+
+class inclui_action_listener implements ActionListener {
+	Map<JComboBox, Boolean> jcheckbox_map;
+	JPanel jpanel_for_jcheckbox;
+	List<Autor> autores_list;
+	JTextField size_reference;
+
+	public inclui_action_listener(Map<JComboBox, Boolean> jcheckbox_map, JPanel jpanel_for_jcheckbox, List<Autor> autores_list, JTextField size_reference) {
+		this.jcheckbox_map = jcheckbox_map;
+		this.jpanel_for_jcheckbox = jpanel_for_jcheckbox;
+		this.autores_list = autores_list;
+		this.size_reference = size_reference;
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		System.out.println(jcheckbox_map);
+		for (JComboBox crnt_combobox : jcheckbox_map.keySet()) {
+			if (e.getSource() == crnt_combobox) {
+				if (jcheckbox_map.get(crnt_combobox)) {
+
+					Vector tmp_vector = new Vector();
+					tmp_vector.add(null);
+
+					for (Autor autor : autores_list) {
+						tmp_vector.add(autor);
+					}
+
+					JComboBox tmp_combobox = new JComboBox(tmp_vector);
+					jcheckbox_map.put(tmp_combobox, true);
+					jpanel_for_jcheckbox.add(tmp_combobox);
+
+					tmp_combobox.addActionListener(this);
+					tmp_combobox.setAlignmentX(JFrame.CENTER_ALIGNMENT);
+					tmp_combobox.setMaximumSize(size_reference.getPreferredSize());
+
+					jpanel_for_jcheckbox.revalidate();
+					jpanel_for_jcheckbox.repaint();
+
+					jcheckbox_map.put(crnt_combobox, false);
+				}
+			}
+		}
+	}
 }
